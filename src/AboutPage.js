@@ -6,7 +6,7 @@ const AboutPage = () => {
   return (
     <div className="about-page">
       <div className="about-content">
-        <h1>Faculty Workload Optimizer</h1>
+        <h1>Faculty Workload Hours Predictor</h1>
         <p>
           This web application predicts and optimizes the weekly teaching workload of faculty members
           based on their experience, previous teaching, research, administrative duties, course difficulty, and more.
