@@ -1,38 +1,340 @@
-.App {
+/* ================= General Body & Font ================= */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  background: linear-gradient(135deg, #f5f0ff, #d0c4f7);
+  color: #333;
+  --card-padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* ================= Header ================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+}
+
+header .logo img {
+  height: 60px;
+  margin-right: 20px;
+}
+
+header h1 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.logout-btn {
+  background: #ff6584;
+  border: none;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #e04d6d;
+}
+
+/* ================= Cards ================= */
+.card {
+  background: linear-gradient(to bottom right, #ffffff, #f3f0ff);
+  padding: 30px 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  margin-bottom: 30px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.card h2, .card h3 {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ================= Forms ================= */
+input[type="text"], input[type="number"], select {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+  outline: none;
+  border: 2px solid #6a11cb;
+  box-shadow: 0 0 5px rgba(106,17,203,0.3);
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+small {
+  color: #555;
+  font-size: 16px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ================= Buttons ================= */
+.btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  color: white;
+  font-weight: 600;
+}
+
+.btn.primary:hover {
+  background: linear-gradient(45deg, #5a0fbf, #1a5ccc);
+}
+
+.btn.secondary {
+  background: #ff6584;
+  color: white;
+  font-weight: 600;
+}
+
+.btn.secondary:hover {
+  background: #e04d6d;
+}
+
+/* ================= Centered Login & Signup ================= */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.login-container, .signup-container {
+  width: 400px;
+  max-width: 90%;
+  background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.login-container:hover, .signup-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.3);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login-container h2, .signup-container h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #fff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login-container input, .signup-container input {
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+}
+
+.login-container input:focus, .signup-container input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(106,17,203,0.5);
+}
+
+.login-container button, .signup-container button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-container button:hover, .signup-container button:hover {
+  background: linear-gradient(45deg, #5a0fbf, #1a5ccc);
+}
+
+.login-container p, .signup-container p {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.login-container a, .signup-container a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ================= Dashboard / Main Content ================= */
+.main {
+  max-width: 1200px;
+  margin: 0 auto; /* centered horizontally */
+  padding: 40px 30px; /* space from all sides */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 30px; /* spacing between sections */
+  box-sizing: border-box;
+}
+
+/* Each Section inside Dashboard */
+.main section {
+  background: linear-gradient(to bottom right, #ffffff, #f3f0ff);
+  padding: 25px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.main section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* ================= Prediction Form ================= */
+.predict-form-container {
+  max-width: 750px;
+  margin: 0 auto 50px auto;
+}
+
+.prediction-result {
+  margin-top: 30px;
+  background: #e8e0ff;
+  padding: 22px;
+  border-radius: 15px;
+  font-size: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* ================= Bulk Prediction Table ================= */
+.bulk-prediction table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 22px;
+  font-size: 18px;
+}
+
+.bulk-prediction th, .bulk-prediction td {
+  padding: 14px;
+  border: 1px solid #ccc;
+}
+
+.bulk-prediction th {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.bulk-prediction tr:hover {
+  background-color: #f5f0ff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* ================= About Page ================= */
+.about-page {
+  max-width: 950px;
+  margin: 80px auto;
+  text-align: center;
+  color: #333;
+  font-size: 20px;
+  background: linear-gradient(to bottom right, #f3eaff, #ffffff);
+  padding: 60px;
+  border-radius: 25px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.about-page h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
+}
+
+.about-page p {
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+  body, html {
+    font-size: 16px;
   }
-  to {
-    transform: rotate(360deg);
+
+  header h1 {
+    font-size: 24px;
+  }
+
+  .predict-form-container, .bulk-prediction, .model-trainer {
+    padding: 25px;
+  }
+
+  .login-container, .signup-container {
+    width: 90%;
+    padding: 35px;
+  }
+
+  .login-container h2, .signup-container h2 {
+    font-size: 28px;
+  }
+
+  .login-container input, .signup-container input {
+    font-size: 16px;
+  }
+
+  .login-container button, .signup-container button {
+    font-size: 16px;
+  }
+
+  .main {
+    padding: 25px 20px;
+    gap: 25px;
+  }
+
+  .main section {
+    padding: 20px;
   }
 }

@@ -1,0 +1,207 @@
+:root {
+  --bg: #f9fafc;
+  --card-bg: #ffffff;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a6a;
+  --accent: #2e3a87;
+  --accent-light: #a3bffa;
+  --border: #ddd;
+  --btn-radius: 10px;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --card-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  font-family: var(--font-family);
+  color: var(--text-primary);
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent);
+  color: #fff;
+  padding: 1.2rem 2rem;
+  border-radius: var(--btn-radius);
+  margin-bottom: 2rem;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header .logo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+header button.logout-btn {
+  background-color: #fff;
+  color: var(--accent);
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+header button.logout-btn:hover {
+  background-color: #e0e0ff;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.card {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--btn-radius);
+  box-shadow: var(--card-shadow);
+  margin-bottom: 2rem;
+}
+
+input[type="file"] {
+  padding: 0.5rem;
+  border-radius: var(--btn-radius);
+  border: 1px solid var(--border);
+}
+
+.predict-form .field {
+  margin-bottom: 1rem;
+}
+
+.predict-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.predict-form input,
+.predict-form select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border-radius: var(--btn-radius);
+  border: 1px solid var(--border);
+}
+
+.predict-form button {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.predict-form button:hover {
+  background-color: #222f6e;
+}
+
+.prediction-result {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.prediction-result h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.prediction-result p {
+  font-size: 1.1rem;
+}
+
+.chart-section canvas {
+  width: 100% !important;
+  height: 400px !important;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+th, td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+th {
+  background-color: #f2f3f7;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+tbody tr:hover {
+  background-color: #f0f0ff;
+}
+
+button {
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.controls-section {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .controls-section {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  section {
+    margin: 1rem;
+  }
+
+  button, input, select {
+    width: 100%;
+  }
+}
+
