@@ -1,0 +1,11 @@
+faculty_name,faculty_experience_years,faculty_rank,teaching_load_previous_sem,research_load,admin_load,course_difficulty,course_credit_hours,num_students,course_level,actual_hours_assigned
+Dr. Smith,2,0,10,4,2,2,3,40,0,10
+Dr. Johnson,8,1,8,8,3,3,3,60,0,12
+Dr. Williams,15,2,6,10,4,4,4,20,1,9
+Dr. Brown,4,0,12,3,2,1,2,80,0,14
+Dr. Jones,10,2,7,12,5,5,4,15,1,8
+Dr. Miller,6,1,9,6,3,3,3,55,0,11
+Dr. Davis,1,0,14,2,1,2,3,90,0,16
+Dr. Garcia,12,2,6,9,3,4,4,18,1,9
+Dr. Martinez,7,1,10,5,2,3,3,45,0,12
+Dr. Rodriguez,5,1,11,4,2,2,3,70,0,13

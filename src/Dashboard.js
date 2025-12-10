@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import ModelTrainer from "./ModelTrainer";
 import PredictForm from "./PredictForm";
 import BulkPrediction from "./BulkPrediction";
@@ -12,20 +11,27 @@ const Dashboard = () => {
   const [normalizationData, setNormalizationData] = useState(null);
   const [prediction, setPrediction] = useState(null);
 
-  // CSV UPLOAD HANDLER
+  // ---------------------------
+  // AUTO-LOAD CSV FROM PUBLIC FOLDER
+  // ---------------------------
+  useEffect(() => {
+    fetch("/data/faculty_workload.csv")
+      .then((res) => res.text())
+      .then((text) => {
+        console.log("Auto-loading CSV...");
+        handleCSVUpload(text);
+      })
+      .catch((err) => console.error("CSV auto-load error:", err));
+  }, []);
+
+  // ---------------------------
+  // CSV UPLOAD HANDLER (AUTO + MANUAL)
+  // ---------------------------
   const handleCSVUpload = (text) => {
     const lines = text.trim().split("\n");
 
-    const detectDelimiter = (line) => {
-      if (line.includes(",")) return ",";
-      if (line.includes("\t")) return "\t";
-      if (line.includes(";")) return ";";
-      return /\s+/;
-    };
-
-    const delimiter = detectDelimiter(lines[0]);
-    const rawHeaders = lines[0].split(delimiter);
-    const headers = rawHeaders.map((h) => h.trim());
+    const delimiter = lines[0].includes(",") ? "," : /\s+/;
+    const headers = lines[0].split(delimiter).map((h) => h.trim());
 
     const parsed = lines.slice(1).map((line) => {
       const parts = line.split(delimiter);
@@ -33,27 +39,37 @@ const Dashboard = () => {
 
       headers.forEach((h, i) => {
         const header = h.trim();
-        const raw = parts[i] ? parts[i].trim() : "0";
+        const rawValue = (parts[i] || "").trim();
 
-        if (header === "faculty_name") obj[header] = raw;
-        else obj[header] = isNaN(parseFloat(raw)) ? 0 : parseFloat(raw);
+        if (header === "faculty_name") {
+          obj[header] = rawValue;
+        } else {
+          const val = parseFloat(rawValue);
+          obj[header] = isNaN(val) ? 0 : val;
+        }
       });
 
       return obj;
     });
 
+    console.log("Parsed CSV Data:", parsed);
     setData(parsed);
-    alert("CSV loaded successfully!");
   };
 
-  // PREDICTION HANDLER
+  // ---------------------------
+  // HANDLE SINGLE PREDICTION
+  // ---------------------------
   const handlePrediction = (predObj) => {
     const { pred } = predObj;
-
     let tip = "";
-    if (pred > 20) tip = "⚠️ High workload. Consider redistributing tasks.";
-    else if (pred < 10) tip = "✅ Light workload. Can handle more duties.";
-    else tip = "👍 Balanced workload. Maintain this schedule.";
+
+    if (pred > 20) {
+      tip = "⚠️ High workload. Consider redistributing tasks.";
+    } else if (pred < 10) {
+      tip = "✅ Light workload. You can take more responsibilities.";
+    } else {
+      tip = "👍 Balanced workload.";
+    }
 
     setPrediction({ ...predObj, suggestion: tip });
   };
@@ -67,15 +83,17 @@ const Dashboard = () => {
         </div>
 
         {/* BACK TO HOME BUTTON */}
-        <Link to="/" className="logout-btn">
-          Back to Home
-        </Link>
+        <button className="logout-btn">
+          <a href="/" style={{ textDecoration: "none", color: "white" }}>Back to Home</a>
+        </button>
       </header>
 
       <main>
-        {/* CSV Upload */}
+        {/* CSV Upload Section */}
         <section className="upload-section card">
-          <h2>Upload Faculty Data</h2>
+          <h2>Upload Faculty Data (Optional)</h2>
+          <p>Default dataset is already loaded. You may upload a new CSV if needed.</p>
+
           <input
             type="file"
             accept=".csv"
@@ -87,7 +105,7 @@ const Dashboard = () => {
           />
         </section>
 
-        {/* Training */}
+        {/* Train Model Section */}
         <section className="train-section card">
           <h2>Train Model</h2>
           <ModelTrainer
@@ -97,9 +115,10 @@ const Dashboard = () => {
           />
         </section>
 
-        {/* Predict */}
+        {/* Single Prediction Section */}
         <section className="predict-section card">
           <h2>Predict Workload for a Faculty Member</h2>
+
           <PredictForm
             model={model}
             normalizationData={normalizationData}
@@ -112,16 +131,15 @@ const Dashboard = () => {
                 Suggested workload for <strong>{prediction.name}</strong>:{" "}
                 {prediction.pred} hrs/week
               </h3>
-              <p>
-                <strong>Recommendation:</strong> {prediction.suggestion}
-              </p>
+              <p><strong>Recommendation:</strong> {prediction.suggestion}</p>
             </div>
           )}
         </section>
 
-        {/* Bulk Prediction */}
+        {/* Bulk Chart Section */}
         <section className="chart-section card">
           <h2>All Faculty Predicted Workloads</h2>
+
           <BulkPrediction
             data={data}
             model={model}
